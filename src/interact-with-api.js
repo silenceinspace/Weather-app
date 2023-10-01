@@ -13,6 +13,30 @@ function fetchLocation(location) {
         throw new Error('Location was not found');
       }
     })
-    .then((object) => console.log(object))
+    .then((object) => consoleLogData(object))
     .catch((err) => console.log(err));
+}
+
+function consoleLogData(dataObject) {
+  console.log(dataObject);
+  console.log(`Country: ${dataObject.location.country}`);
+  console.log(`City: ${dataObject.location.name}`);
+  console.log(`Localtime: ${dataObject.location.localtime}`);
+
+  console.log(`Current condition: ${dataObject.current.condition.text}`);
+  console.log(`Temperature in Celsius (now): ${dataObject.current.temp_c}`);
+  console.log(`Temperature in Fahrenheit (now): ${dataObject.current.temp_f}`);
+
+  console.log('Forecast for next 3 days');
+  console.log(`1) Date: ${dataObject.forecast.forecastday[0].date}`);
+  console.log('Info about day:');
+  console.log(dataObject.forecast.forecastday[0].day);
+
+  console.log(`2) Date: ${dataObject.forecast.forecastday[1].date}`);
+  console.log('Info about day:');
+  console.log(dataObject.forecast.forecastday[1].day);
+
+  console.log(`3) Date: ${dataObject.forecast.forecastday[2].date}`);
+  console.log('Info about day:');
+  console.log(dataObject.forecast.forecastday[2].day);
 }
