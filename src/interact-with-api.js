@@ -26,17 +26,4 @@ function consoleLogData(dataObject) {
   console.log(`Current condition: ${dataObject.current.condition.text}`);
   console.log(`Temperature in Celsius (now): ${dataObject.current.temp_c}`);
   console.log(`Temperature in Fahrenheit (now): ${dataObject.current.temp_f}`);
-
-  console.log('Forecast for next 3 days');
-  console.log(`1) Date: ${dataObject.forecast.forecastday[0].date}`);
-  console.log('Info about day:');
-  console.log(dataObject.forecast.forecastday[0].day);
-
-  console.log(`2) Date: ${dataObject.forecast.forecastday[1].date}`);
-  console.log('Info about day:');
-  console.log(dataObject.forecast.forecastday[1].day);
-
-  console.log(`3) Date: ${dataObject.forecast.forecastday[2].date}`);
-  console.log('Info about day:');
-  console.log(dataObject.forecast.forecastday[2].day);
 }
