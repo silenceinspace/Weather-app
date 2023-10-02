@@ -1,11 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Weather app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <form class="form">
+        <p>
+          <input type="text" />
+          <button class="input-button"></button>
+        </p>
+      </form>
+      <div class="main">
+        <div class="toggle-temperature">
+          Temperature in:
+          <select id="temperature-style">
+            <option value="Fahrenheit">Fahrenheit</option>
+            <option value="Celcius">Celcius</option>
+          </select>
+        </div>
+        <div class="weather-info">
+          <div class="weather-cell">
+            <p class="date"></p>
+            <div><img class="icon" src="" alt="" /></div>
+            <p class="temperature"></p>
+          </div>
+          <div class="weather-cell">
+            <p class="date"></p>
+            <div><img class="icon" src="" alt="" /></div>
+            <p class="temperature"></p>
+          </div>
+          <div class="weather-cell">
+            <p class="date"></p>
+            <div><img class="icon" src="" alt="" /></div>
+            <p class="temperature"></p>
+          </div>
+        </div>
+        <div class="current-location"></div>
+      </div>
+    </div>
+    <footer id="footer">
+      <p></p>
+    </footer>
+  </body>
 </html>
