@@ -7,11 +7,12 @@
 body {
   display: grid;
   grid-template-rows: 1fr 50px;
-  background-color: skyblue;
+  background-image: url(./images/main-theme.jpg);
+  background-size:cover ;
+  background-repeat: no-repeat;
   min-height: 100vh;
 }
 
-button:hover,
 input:hover,
 select:hover {
   cursor: pointer;
@@ -20,14 +21,6 @@ select:hover {
 #content {
   display: grid;
   grid-template-rows: 100px 1fr;
-}
-
-.form {
-  background-color: blue;
-}
-
-.main {
-  background-color: green;
 }
 
 .form {
@@ -71,11 +64,103 @@ select:hover {
   border-radius: 5px;
 }
 
-.form button:hover {
+.form button:hover,
+.form button:focus {
   color: red;
   text-decoration: underline;
 }
 
+.form button:focus {
+  outline: none;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 50px 1fr 50px;
+  padding: 30px 60px;
+  gap: 10px;
+}
+
+.toggle-temperature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.toggle-temperature label {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: white;
+}
+
+.toggle-temperature select {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: bold;
+  color: purple;
+}
+
+.weather-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.weather-info > .weather-cell {
+  display: grid;
+  grid-template-rows: 40px 1fr 40px;
+  align-items: center;
+  justify-items: center;
+
+  padding: 10px;
+  color: orange;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border: 2px solid red;
+}
+
+.weather-info > .weather-cell:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.weather-cell .icon {
+  filter: invert(100%);
+  height: 130px;
+  width: 130px;
+}
+
+.current-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: white;
+}
+
 #footer {
-  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: orange;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#footer a {
+  color: white;
+  text-decoration: none;
+}
+
+#footer a:hover,
+#footer a:focus {
+  color: red;
+  text-decoration: underline;
+}
+
+#footer a:focus {
+  outline: none;
 }
