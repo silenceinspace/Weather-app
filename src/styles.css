@@ -4,3 +4,78 @@
   box-sizing: border-box;
 }
 
+body {
+  display: grid;
+  grid-template-rows: 1fr 50px;
+  background-color: skyblue;
+  min-height: 100vh;
+}
+
+button:hover,
+input:hover,
+select:hover {
+  cursor: pointer;
+}
+
+#content {
+  display: grid;
+  grid-template-rows: 100px 1fr;
+}
+
+.form {
+  background-color: blue;
+}
+
+.main {
+  background-color: green;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form p {
+  display: flex;
+  gap: 20px;
+}
+
+.form input,
+.form button {
+  appearance: none;
+  border: none;
+}
+
+.form input {
+  width: 200px;
+  height: 40px;
+  border-radius: 15px;
+  padding: 5px 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.form input:focus {
+  outline: none;
+  box-shadow: 0 0 20px 5px purple;
+}
+
+.form button {
+  padding: 5px 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+}
+
+.form button:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+#footer {
+  background-color: black;
+}
