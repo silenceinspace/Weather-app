@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -9,11 +9,11 @@ module.exports = {
   },
   mode: 'development',
   devtool: 'inline-source-map',
-  plugins: [
+  /*plugins: [
     new HtmlWebpackPlugin({
       title: 'Weather app',
     }),
-  ],
+  ],*/
   module: {
     rules: [
       {
