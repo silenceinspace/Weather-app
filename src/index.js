@@ -1,4 +1,5 @@
-import { fetchLocation } from './interact-with-api';
+import { inputController } from './dom-manipulation';
 import './styles.css';
 
-fetchLocation('Prague');
+inputController();
+// fetchLocation('Prague');

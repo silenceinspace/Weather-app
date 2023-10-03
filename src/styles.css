@@ -8,7 +8,7 @@ body {
   display: grid;
   grid-template-rows: 1fr 50px;
   background-image: url(./images/main-theme.jpg);
-  background-size:cover ;
+  background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
 }
@@ -32,6 +32,15 @@ select:hover {
 .form p {
   display: flex;
   gap: 20px;
+  position: relative;
+}
+
+span.error-message {
+  position: absolute;
+  top: 50px;
+  color: red;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .form input,
