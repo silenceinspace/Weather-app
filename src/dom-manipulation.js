@@ -8,16 +8,28 @@ const form = document.querySelector('.form');
 const errorSpan = document.querySelector('.error-message');
 const locationName = document.querySelector('.current-location');
 const weatherInfoBlocks = document.querySelectorAll('.weather-cell');
+const temperatureType = document.querySelector('#temperature-style');
 
+// Keep all event listeners in one place
 function inputController() {
-  console.log('Initialize click and keyboard events.');
+  console.log('Initialize click,keyboard, and change events.');
   button.addEventListener('click', getValueFromInput);
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      getValueFromInput();
-    }
-  });
+  input.addEventListener('keydown', submitLocationOnEnter);
+  temperatureType.addEventListener('change', toggleTemperatureStyle);
+}
+
+// Globally store a current location
+let currentShownLocation;
+
+function toggleTemperatureStyle() {
+  displayTemperature();
+}
+
+function submitLocationOnEnter(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    getValueFromInput();
+  }
 }
 
 function getValueFromInput() {
@@ -29,21 +41,24 @@ function clearInput() {
   form.reset();
 }
 
+// Callback function that receives a processed weather object from interact-with-api file
 function displayInfo(weatherInfo) {
-  const data = weatherInfo;
-  displayCityAndCountryName(data);
-  displayDates(data);
+  currentShownLocation = weatherInfo;
+  console.log(currentShownLocation);
+  displayCityAndCountryName();
+  displayDates();
+  displayTemperature();
 }
 
-function displayCityAndCountryName(object) {
-  const city = object.location.name;
-  const country = object.location.country;
+function displayCityAndCountryName() {
+  const city = currentShownLocation.location.name;
+  const country = currentShownLocation.location.country;
 
   locationName.textContent = `${city}, ${country}`;
 }
 
-function displayDates(object) {
-  const dateArray = formatDates(object.forecast.forecastday);
+function displayDates() {
+  const dateArray = formatDates();
 
   let count = 0;
   weatherInfoBlocks.forEach((block) => {
@@ -52,9 +67,10 @@ function displayDates(object) {
   });
 }
 
-function formatDates(originalArray) {
+function formatDates() {
+  const nonFormattedArray = currentShownLocation.forecast.forecastday;
   let formattedArray = [];
-  originalArray.forEach((element) => {
+  nonFormattedArray.forEach((element) => {
     const dateSeparateDigits = element.date.split('-');
     const year = dateSeparateDigits[0];
     const month = dateSeparateDigits[1];
@@ -65,4 +81,45 @@ function formatDates(originalArray) {
     formattedArray.push(formattedDate);
   });
   return formattedArray;
+}
+
+function displayTemperature() {
+  let count = 0;
+  weatherInfoBlocks.forEach((block) => {
+    const typeOfTemperature = checkSelectedTypeOfTemperature();
+    const infoAboutDay = currentShownLocation.forecast.forecastday[count].day;
+
+    let min;
+    let max;
+    let symbol;
+    if (typeOfTemperature === 'Celsius') {
+      min = infoAboutDay.mintemp_c;
+      max = infoAboutDay.maxtemp_c;
+      symbol = convertUnicodeCharToSymbol(0x2103);
+    } else if (typeOfTemperature === 'Fahrenheit') {
+      min = infoAboutDay.mintemp_f;
+      max = infoAboutDay.maxtemp_f;
+      symbol = convertUnicodeCharToSymbol(0x2109);
+    }
+    min = roundTemperature(min);
+    max = roundTemperature(max);
+
+    block.children[2].textContent = `${min} - ${max} ${symbol}`;
+    count++;
+  });
+}
+
+function convertUnicodeCharToSymbol(seq) {
+  const symbol = String.fromCharCode(seq);
+  return symbol;
+}
+
+function roundTemperature(temp) {
+  const roundedValue = Math.round(temp);
+  return roundedValue;
+}
+
+function checkSelectedTypeOfTemperature() {
+  const currentValue = temperatureType.value;
+  return currentValue;
 }

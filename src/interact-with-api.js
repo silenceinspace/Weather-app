@@ -16,7 +16,6 @@ function fetchLocation(location, success, error) {
       }
     })
     .then((object) => {
-      console.log(object);
       success(object);
     })
     .catch((err) => {
