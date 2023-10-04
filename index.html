@@ -10,54 +10,55 @@
     <div id="content">
       <form class="form">
         <p>
-          <input type="text" placeholder="Location..." />
-          <button class="input-button">Find</button>
+          <input class="location-input" type="text" placeholder="Location..." />
+          <button class="input-button" type="button">Find</button>
+          <span class="error-message"></span>
         </p>
       </form>
       <div class="main">
         <div class="toggle-temperature">
           <label for="temperature-style">Temperature in:</label>
           <select id="temperature-style">
+            <option value="Celsius" selected>Celsius</option>
             <option value="Fahrenheit">Fahrenheit</option>
-            <option value="Celcius">Celcius</option>
           </select>
         </div>
         <div class="weather-info">
           <div class="weather-cell">
-            <p class="date">October 2, 2023</p>
+            <p class="date"></p>
             <div>
               <img
                 class="icon"
-                src="../src/images/sunny-icon.svg"
-                alt="icon representing weather condition"
+                src=""
+                alt=""
               />
             </div>
-            <p class="temperature">10C - 20C</p>
+            <p class="temperature"></p>
           </div>
           <div class="weather-cell">
-            <p class="date">October 3, 2023</p>
+            <p class="date"></p>
             <div>
               <img
                 class="icon"
-                src="../src/images/sunny-icon.svg"
-                alt="icon representing weather condition"
+                src=""
+                alt=""
               />
             </div>
-            <p class="temperature">10C - 20C</p>
+            <p class="temperature"></p>
           </div>
           <div class="weather-cell">
-            <p class="date">October 4, 2023</p>
+            <p class="date"></p>
             <div>
               <img
                 class="icon"
-                src="../src/images/sunny-icon.svg"
-                alt="icon representing weather condition"
+                src=""
+                alt=""
               />
             </div>
-            <p class="temperature">10C - 20C</p>
+            <p class="temperature"></p>
           </div>
         </div>
-        <div class="current-location">Prague, Czech Republic</div>
+        <div class="current-location"></div>
       </div>
     </div>
     <footer id="footer">
@@ -73,3 +74,5 @@
 
 <!-- Give credit to the page photo's author -->
 <!-- Photo by <a href="https://unsplash.com/@jokerhoi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Chan Hoi</a> on <a href="https://unsplash.com/photos/uj-w-v7OFT4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+
+<!-- Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> -->
