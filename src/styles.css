@@ -86,7 +86,7 @@ span.error-message {
 .main {
   display: grid;
   grid-template-rows: 50px 1fr 50px;
-  padding: 30px 60px;
+  padding: 0px 60px;
   gap: 10px;
 }
 
@@ -117,7 +117,7 @@ span.error-message {
 
 .weather-info > .weather-cell {
   display: grid;
-  grid-template-rows: 40px 1fr 40px;
+  grid-template-rows: 40px 1fr 40px 80px;
   align-items: center;
   justify-items: center;
 
