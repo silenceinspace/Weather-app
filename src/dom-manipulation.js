@@ -1,5 +1,7 @@
 import { fetchLocation } from './interact-with-api';
 import { format } from 'date-fns';
+import weatherConditionData from './weather-conditions.json';
+// import weatherIcons from './images/weather-icons/*';
 export { inputController };
 
 const button = document.querySelector('.input-button');
@@ -48,6 +50,7 @@ function displayInfo(weatherInfo) {
   displayCityAndCountryName();
   displayDates();
   displayTemperature();
+  displayWeatherCondition();
 }
 
 function displayCityAndCountryName() {
@@ -122,4 +125,39 @@ function roundTemperature(temp) {
 function checkSelectedTypeOfTemperature() {
   const currentValue = temperatureType.value;
   return currentValue;
+}
+
+const weatherIcons = importAll(
+  // eslint-disable-next-line no-undef
+  require.context('./images/weather-icons', false, /.png$/)
+);
+
+// Dynamically importing all images from weather-icons/ directory and storing in an object with properties that equal to images' codes
+function importAll(request) {
+  let icons = {};
+
+  request.keys().map((item) => {
+    const iconId = item.slice(2, 5);
+    icons[iconId] = request(item);
+  });
+  return icons;
+}
+
+function displayWeatherCondition() {
+  // Importing json file from src/ directory
+  const conditionObject = weatherConditionData;
+
+  for (let i = 0; i < 3; i++) {
+    const conditionCode =
+      currentShownLocation.forecast.forecastday[i].day.condition.code;
+    console.log(conditionCode);
+
+    conditionObject.forEach((condition) => {
+      if (condition.code === conditionCode) {
+        const image = weatherInfoBlocks[i].children[1].children[0];
+        image.src = weatherIcons[condition.icon];
+        image.alt = `Weather condition: ${condition.day}`;
+      }
+    });
+  }
 }
