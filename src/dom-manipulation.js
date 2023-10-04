@@ -51,6 +51,7 @@ function displayInfo(weatherInfo) {
   displayDates();
   displayTemperature();
   displayWeatherCondition();
+  displayExtraWeatherInfo();
 }
 
 function displayCityAndCountryName() {
@@ -150,7 +151,6 @@ function displayWeatherCondition() {
   for (let i = 0; i < 3; i++) {
     const conditionCode =
       currentShownLocation.forecast.forecastday[i].day.condition.code;
-    console.log(conditionCode);
 
     conditionObject.forEach((condition) => {
       if (condition.code === conditionCode) {
@@ -160,4 +160,20 @@ function displayWeatherCondition() {
       }
     });
   }
+}
+
+function displayExtraWeatherInfo() {
+  const locationWeatherInfo = currentShownLocation.forecast.forecastday;
+
+  let count = 0;
+  weatherInfoBlocks.forEach((block) => {
+    const precipitation = block.children[3].children[0];
+    const humidity = block.children[3].children[1];
+    const wind = block.children[3].children[2];
+
+    precipitation.textContent = `Precipitation: ${locationWeatherInfo[count].day.totalprecip_mm}mm`;
+    humidity.textContent = `Humidity: ${locationWeatherInfo[count].day.avghumidity}%`;
+    wind.textContent = `Wind(max): ${locationWeatherInfo[count].day.maxwind_kph}km/h`;
+    count++;
+  });
 }
