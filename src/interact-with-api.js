@@ -9,7 +9,7 @@ function fetchLocation(
 ) {
   loaderElement();
   const request = fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=e1f664d77dd7414a88681100232009&q=${location}&days=3`
+    `https://api.weatherapi.com/v1/forecast.json?key=e1f664d77dd7414a88681100232009&q=${location}&days=3`
   );
 
   request
