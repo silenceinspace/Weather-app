@@ -1,7 +1,48 @@
+/* Use custom font which is bold by default */
 @font-face {
   font-family: 'customFont';
-  src: url(./fonts/RobotoMono-Bold.ttf) format('ttf');
-  font-weight: bold;
+  src: url(./fonts/RobotoMono-Bold.ttf) format('truetype');
+}
+
+:root {
+  /* Color property */
+  --color-main-text: white;
+  --color-weather-info: yellow;
+  --color-error-message: red;
+  --button-color-on-hover: purple;
+  --select-element-color: purple;
+  --footer-color: orange;
+  --footer-color-on-hover: red;
+
+  /* Font-size property */
+  --font-size-titles: 1.7rem;
+  --font-size-input-field: 1.5rem;
+  --font-size-error-message: 1.5rem;
+  --font-size-weather-info: 1.3rem;
+  --font-size-smaller-elements: 1.3rem;
+
+  /* Input properties  */
+  --input-field-width: 200px;
+  --input-field-height: 40px;
+  --input-border: 2px solid black;
+  --input-padding: 5px 20px;
+  --input-box-shadow: 0 0 20px 5px purple;
+
+  /* Button properties */
+  --button-background-color: orange;
+  --button-padding: 5px 10px;
+
+  /* Weather info block properties*/
+  --main-block-padding: 0 60px;
+  --weather-info-block-background: linear-gradient(0deg, blue, 5%, purple);
+  --weather-info-block-border: 2px solid black;
+  --weather-icon-width: 130px;
+  --weather-icon-height: 130px;
+  --weather-cell-padding: 10px;
+
+  /* Border-radius property */
+  --big-rounded-corners: 15px;
+  --small-rounded-corners: 5px;
 }
 
 * {
@@ -42,12 +83,12 @@ select:hover {
   position: relative;
 }
 
+/* Display an error message if a request was wrong */
 span.error-message {
   position: absolute;
   top: 40px;
-  color: red;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: var(--color-error-message);
+  font-size: var(--font-size-error-message);
 }
 
 .form input,
@@ -55,38 +96,44 @@ span.error-message {
   appearance: none;
 }
 
+/* Make sure that input, button, select elements have the same Robotomono font */
+button,
+input,
+select {
+  font-family: inherit;
+}
+
 .form input {
-  width: 200px;
-  height: 40px;
-  border-radius: 15px;
-  border: 2px solid black;
-  padding: 5px 20px;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
   font-style: italic;
   background-color: transparent;
+
+  padding: var(--input-padding);
+  border: var(--input-border);
+  border-radius: var(--big-rounded-corners);
+  width: var(--input-field-width);
+  height: var(--input-field-height);
+  color: var(--color-main-text);
+  font-size: var(--font-size-input-field);
 }
 
 .form input:focus {
   outline: none;
-  box-shadow: 0 0 20px 5px purple;
+  box-shadow: var(--input-box-shadow);
 }
 
 .form button {
   border: none;
-  padding: 5px 10px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  background-color: orange;
-  color: white;
-  border-radius: 5px;
+  background-color: var(--button-background-color);
+  padding: var(--button-padding);
+  font-size: var(--font-size-smaller-elements);
+  color: var(--color-main-text);
+  border-radius: var(--small-rounded-corners);
 }
 
 .form button:hover,
 .form button:focus {
-  color: purple;
   text-decoration: underline;
+  color: var(--button-color-on-hover);
 }
 
 .form button:focus {
@@ -96,8 +143,8 @@ span.error-message {
 .main {
   display: grid;
   grid-template-rows: 50px 1fr 50px;
-  padding: 0px 60px;
   gap: 10px;
+  padding: var(--main-block-padding);
 }
 
 .toggle-temperature {
@@ -108,21 +155,20 @@ span.error-message {
 }
 
 .toggle-temperature label {
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: white;
+  font-size: var(--font-size-titles);
+  color: var(--color-main-text);
 }
 
 .toggle-temperature select {
-  font-size: 1.3rem;
   font-style: italic;
-  font-weight: bold;
-  color: purple;
+  color: var(--select-element-color);
+  font-size: var(--font-size-smaller-elements);
 }
 
 .weather-info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  font-size: var(--font-size-weather-info);
 }
 
 .weather-info > .weather-cell {
@@ -130,23 +176,21 @@ span.error-message {
   grid-template-rows: 40px 1fr 40px 80px;
   align-items: center;
   justify-items: center;
-
-  padding: 10px;
-  color: yellow;
-  font-weight: bold;
-  font-size: 1.5rem;
-  border: 2px solid black;
-  background: linear-gradient(0deg, blue, 5%, purple);
+  padding: var(--weather-cell-padding);
+  color: var(--color-weather-info);
+  border: var(--weather-info-block-border);
+  background: var(--weather-info-block-background);
 }
 
+/* Create a block with rounded corners */
 .weather-info > .weather-cell:nth-child(1) {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-top-left-radius: var(--big-rounded-corners);
+  border-bottom-left-radius: var(--big-rounded-corners);
 }
 
 .weather-info > .weather-cell:nth-child(3) {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-right-radius: var(--big-rounded-corners);
+  border-bottom-right-radius: var(--big-rounded-corners);
 }
 
 .weather-info > .weather-cell:nth-child(2) {
@@ -155,39 +199,37 @@ span.error-message {
 }
 
 .weather-cell .icon {
-  height: 130px;
-  width: 130px;
+  /* Disable selecting svgs */
+  pointer-events: none;
+  height: var(--weather-icon-height);
+  width: var(--weather-icon-width);
 }
 
 .current-location {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: white;
+  font-size: var(--font-size-titles);
+  color: var(--color-main-text);
 }
 
 #footer {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: orange;
-  font-size: 1.3rem;
-  font-weight: bold;
+  color: var(--footer-color);
+  font-size: var(--font-size-smaller-elements);
 }
 
 #footer a {
-  color: white;
   text-decoration: none;
+  color: var(--color-main-text);
 }
 
 #footer a:hover,
 #footer a:focus {
-  color: red;
   text-decoration: underline;
+  color: var(--footer-color-on-hover);
 }
 
 #footer a:focus {
