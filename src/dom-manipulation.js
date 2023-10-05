@@ -1,6 +1,10 @@
 import { fetchLocation } from './interact-with-api';
 import { format, getYear } from 'date-fns';
 import weatherConditionData from './weather-conditions.json';
+import {
+  checkLocalStorage,
+  populateLocalStorage,
+} from './local-storage-module';
 export { inputController, keepYearInFooterUpdated };
 
 const button = document.querySelector('.input-button');
@@ -20,6 +24,15 @@ function inputController() {
   button.addEventListener('click', getValueFromInput);
   input.addEventListener('keydown', submitLocationOnEnter);
   temperatureType.addEventListener('change', toggleTemperatureStyle);
+
+  // Check local storage and display initial page
+  const initialState = checkLocalStorage();
+  if (!initialState) {
+    fetchLocation('Prague', displayInfo, errorSpan, toggleLoader);
+  } else {
+    const location = initialState.location.name;
+    fetchLocation(location, displayInfo, errorSpan, toggleLoader);
+  }
 }
 
 // Globally store a current location
@@ -37,6 +50,7 @@ function submitLocationOnEnter(e) {
 }
 
 function getValueFromInput() {
+  // Imported function to fetch and retrieve data
   fetchLocation(input.value, displayInfo, errorSpan, toggleLoader);
   clearInput();
 }
@@ -69,6 +83,8 @@ function useModuleElement() {
 // Callback function that receives a processed weather object from interact-with-api file
 function displayInfo(weatherInfo) {
   currentShownLocation = weatherInfo;
+  // Update local storage here
+  populateLocalStorage(currentShownLocation);
   console.log(currentShownLocation);
   displayCityAndCountryName();
   displayDates();

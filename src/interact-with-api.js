@@ -18,7 +18,6 @@ function fetchLocation(
         setTimeout(() => {
           if (response.status == 200) {
             errorMessage.textContent = '';
-            console.log(response);
             resolve(response.json());
           } else {
             errorMessage.textContent = 'Location was not found!';
