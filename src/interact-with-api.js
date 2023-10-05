@@ -1,5 +1,6 @@
 export { fetchLocation };
 
+// Function is called inside a DOM module so it is important to have these parameters as they are modified with each call 
 function fetchLocation(
   location,
   callbackToGetWeatherObject,

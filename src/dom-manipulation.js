@@ -18,14 +18,13 @@ const loader = document.querySelector('.loader');
 const moduleElement = document.querySelector('.module');
 const footer = document.querySelector('.footer-year');
 
-// Keep all event listeners in one place
+// Keep all event listeners in one place that are added on a page load
 function inputController() {
-  console.log('Initialize click,keyboard, and change events.');
   button.addEventListener('click', getValueFromInput);
   input.addEventListener('keydown', submitLocationOnEnter);
   temperatureType.addEventListener('change', toggleTemperatureStyle);
 
-  // Check local storage and display initial page
+  // Check local storage and define initial page view
   const initialState = checkLocalStorage();
   if (!initialState) {
     fetchLocation('Prague', displayInfo, errorSpan, toggleLoader);
@@ -35,7 +34,7 @@ function inputController() {
   }
 }
 
-// Globally store a current location
+// Globally store a current location to get its value in a couple different functions
 let currentShownLocation;
 
 function toggleTemperatureStyle() {
@@ -59,6 +58,7 @@ function clearInput() {
   form.reset();
 }
 
+// Show a loading component
 function toggleLoader() {
   useModuleElement();
   if (loader.classList[1] === 'hidden') {
@@ -80,12 +80,11 @@ function useModuleElement() {
   }
 }
 
-// Callback function that receives a processed weather object from interact-with-api file
+// Callback function that receives a processed weather object from a different module
 function displayInfo(weatherInfo) {
   currentShownLocation = weatherInfo;
-  // Update local storage here
+  // Update local storage 
   populateLocalStorage(currentShownLocation);
-  console.log(currentShownLocation);
   displayCityAndCountryName();
   displayDates();
   displayTemperature();
@@ -96,13 +95,11 @@ function displayInfo(weatherInfo) {
 function displayCityAndCountryName() {
   const city = currentShownLocation.location.name;
   const country = currentShownLocation.location.country;
-
   locationName.textContent = `${city}, ${country}`;
 }
 
 function displayDates() {
   const dateArray = formatDates();
-
   let count = 0;
   weatherInfoBlocks.forEach((block) => {
     block.children[0].textContent = dateArray[count];
@@ -110,6 +107,7 @@ function displayDates() {
   });
 }
 
+// Use fns-library to format dates
 function formatDates() {
   const nonFormattedArray = currentShownLocation.forecast.forecastday;
   let formattedArray = [];
@@ -138,10 +136,12 @@ function displayTemperature() {
     if (typeOfTemperature === 'Celsius') {
       min = infoAboutDay.mintemp_c;
       max = infoAboutDay.maxtemp_c;
+      // Get a celsius symbol
       symbol = convertUnicodeCharToSymbol(0x2103);
     } else if (typeOfTemperature === 'Fahrenheit') {
       min = infoAboutDay.mintemp_f;
       max = infoAboutDay.maxtemp_f;
+      // Get a fahrenheit symbol
       symbol = convertUnicodeCharToSymbol(0x2109);
     }
     min = roundTemperature(min);
@@ -167,12 +167,12 @@ function checkSelectedTypeOfTemperature() {
   return currentValue;
 }
 
+// Dynamically importing all images from weather-icons/ directory and storing into an object with properties that equal to images' codes
 const weatherIcons = importAll(
   // eslint-disable-next-line no-undef
   require.context('./images/weather-icons', false, /.png$/)
 );
 
-// Dynamically importing all images from weather-icons/ directory and storing in an object with properties that equal to images' codes
 function importAll(request) {
   let icons = {};
 
