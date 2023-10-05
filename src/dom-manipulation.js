@@ -1,7 +1,6 @@
 import { fetchLocation } from './interact-with-api';
 import { format } from 'date-fns';
 import weatherConditionData from './weather-conditions.json';
-// import weatherIcons from './images/weather-icons/*';
 export { inputController };
 
 const button = document.querySelector('.input-button');
@@ -11,6 +10,8 @@ const errorSpan = document.querySelector('.error-message');
 const locationName = document.querySelector('.current-location');
 const weatherInfoBlocks = document.querySelectorAll('.weather-cell');
 const temperatureType = document.querySelector('#temperature-style');
+const loader = document.querySelector('.loader');
+const moduleElement = document.querySelector('.module');
 
 // Keep all event listeners in one place
 function inputController() {
@@ -35,12 +36,33 @@ function submitLocationOnEnter(e) {
 }
 
 function getValueFromInput() {
-  fetchLocation(input.value, displayInfo, errorSpan);
+  fetchLocation(input.value, displayInfo, errorSpan, toggleLoader);
   clearInput();
 }
 
 function clearInput() {
   form.reset();
+}
+
+function toggleLoader() {
+  useModuleElement();
+  if (loader.classList[1] === 'hidden') {
+    loader.classList.remove('hidden');
+    loader.classList.add('visible');
+  } else {
+    loader.classList.remove('visible');
+    loader.classList.add('hidden');
+  }
+}
+
+function useModuleElement() {
+  if (moduleElement.classList[1] === 'passive') {
+    moduleElement.classList.remove('passive');
+    moduleElement.classList.add('active');
+  } else {
+    moduleElement.classList.remove('active');
+    moduleElement.classList.add('passive');
+  }
 }
 
 // Callback function that receives a processed weather object from interact-with-api file
