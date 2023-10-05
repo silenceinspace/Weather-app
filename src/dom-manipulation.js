@@ -1,7 +1,7 @@
 import { fetchLocation } from './interact-with-api';
-import { format } from 'date-fns';
+import { format, getYear } from 'date-fns';
 import weatherConditionData from './weather-conditions.json';
-export { inputController };
+export { inputController, keepYearInFooterUpdated };
 
 const button = document.querySelector('.input-button');
 const input = document.querySelector('.location-input');
@@ -12,6 +12,7 @@ const weatherInfoBlocks = document.querySelectorAll('.weather-cell');
 const temperatureType = document.querySelector('#temperature-style');
 const loader = document.querySelector('.loader');
 const moduleElement = document.querySelector('.module');
+const footer = document.querySelector('.footer-year');
 
 // Keep all event listeners in one place
 function inputController() {
@@ -198,4 +199,9 @@ function displayExtraWeatherInfo() {
     wind.textContent = `Wind(max): ${locationWeatherInfo[count].day.maxwind_kph}km/h`;
     count++;
   });
+}
+
+function keepYearInFooterUpdated() {
+  const currentYear = getYear(new Date());
+  footer.textContent = `${currentYear}`;
 }

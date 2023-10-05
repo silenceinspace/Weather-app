@@ -1,5 +1,5 @@
-import { inputController } from './dom-manipulation';
+import { inputController, keepYearInFooterUpdated } from './dom-manipulation';
 import './styles.css';
 
+keepYearInFooterUpdated();
 inputController();
-
