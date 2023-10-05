@@ -17,7 +17,7 @@
   /* Font-size property */
   --font-size-titles: 1.7rem;
   --font-size-input-field: 1.5rem;
-  --font-size-error-message: 1.5rem;
+  --font-size-error-message: 1.3rem;
   --font-size-weather-info: 1.3rem;
   --font-size-smaller-elements: 1.3rem;
 
@@ -43,6 +43,12 @@
   /* Border-radius property */
   --big-rounded-corners: 15px;
   --small-rounded-corners: 5px;
+
+  /* Loader spinner */
+  --loader-animation-spin-color: 15px solid blue;
+  --loader-animation-width: 80px;
+  --loader-animation-height: 80px;
+  --loader-spin-speed: 2s;
 }
 
 * {
@@ -69,6 +75,7 @@ select:hover {
 #content {
   display: grid;
   grid-template-rows: 100px 1fr;
+  position: relative;
 }
 
 .form {
@@ -168,6 +175,7 @@ select {
 .weather-info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
   font-size: var(--font-size-weather-info);
 }
 
@@ -211,6 +219,58 @@ select {
   justify-content: center;
   font-size: var(--font-size-titles);
   color: var(--color-main-text);
+}
+
+/* Animate loading data */
+.loader {
+  position: absolute;
+  /* Center an absolute position element, translate is relevant to the element's sizes while top and left position look at the parent with relative property */
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 10;
+  border: 15px solid lightgrey;
+  border-radius: 50%;
+  animation: spin linear infinite;
+  animation-duration: var(--loader-spin-speed);
+  border-top: var(--loader-animation-spin-color);
+  width: var(--loader-animation-width);
+  height: var(--loader-animation-height);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader.hidden {
+  display: none;
+}
+
+.loader.visible {
+  display: block;
+}
+
+.module {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--big-rounded-corners);
+  background-color: grey;
+  opacity: 80%;
+  z-index: 5;
+}
+
+.module.passive {
+  display: none;
+}
+
+.module.active {
+  display: block;
 }
 
 #footer {
