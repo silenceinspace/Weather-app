@@ -33,7 +33,7 @@
   --button-padding: 5px 10px;
 
   /* Weather info block properties*/
-  --main-block-padding: 0 60px;
+  --main-block-padding: 0 250px;
   --weather-info-block-background: linear-gradient(0deg, blue, 5%, purple);
   --weather-info-block-border: 2px solid black;
   --weather-icon-width: 130px;
